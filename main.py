@@ -1,3 +1,4 @@
+#TODO print element from li tag and a tag inside a div and create a dictionary
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 
@@ -5,13 +6,25 @@ from selenium.webdriver.common.by import By
 chrome_driver_path="C:\devlopmentAppBr\chromedriver.exe"
 driver=webdriver.Chrome(executable_path=chrome_driver_path)
 
-driver.get("https://www.amazon.in/gp/product/B08372ZPVS/ref=ewc_pr_img_1?smid=A14CZOWI0VEHLG&psc=1")
-#driver.get("https://selenium-python.readthedocs.io/locating-elements.html")
-#price=driver.find_elements_by_class_name("a-offscreen")
-#price=driver.find_element(By.CLASS_NAME, "a-offscreen")
-price=driver.find_element(By.CLASS_NAME,"a-price-whole")
-print(price.text)
-print("this is working")
+
+driver.get("https://www.python.org/")#[@id="content"]div/section/div[3]/div[2]/div/ul/li[1]/time/text()
+GetTime=driver.find_elements(By.XPATH,'//*[@id="content"]/div/section/div[3]/div[2]/div/ul/li/time')
+GetName=driver.find_elements(By.XPATH,'//*[@id="content"]/div/section/div[3]/div[2]/div/ul/li/a')
+a=[]
+b=[]
+for i in range(len(GetTime)):
+    a.append(GetTime[i].text)
+for i in range(len(GetName)):
+    b.append(GetName[i].text)
+print(a)
+print(b)
+dic1=dict()
+j=0
+for i in range(len(a)):
+    dic1[j]={"time":a[i],"name":b[i]}
+    j+=1
+print(dic1)
+
 #stops a tab on browser
 driver.close()
 #close chrome
